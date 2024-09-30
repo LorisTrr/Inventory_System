@@ -1,4 +1,4 @@
--- Créer la base de données
+
 CREATE DATABASE IF NOT EXISTS inventory_system;
 
 -- Utiliser la base de données

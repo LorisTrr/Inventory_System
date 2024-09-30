@@ -1,18 +1,37 @@
 import streamlit as st
+from database_manager import DatabaseManager  # Assurez-vous d'avoir le bon chemin d'importation
 
-# Titre de la page
-st.title("Test d'affichage avec Streamlit")
+# Configuration de la connexion à la base de données
+db = DatabaseManager(
+    host='localhost',
+    user='root',          # Remplace par ton nom d'utilisateur MySQL
+    password='',          # Remplace par ton mot de passe MySQL
+    database='test2'
+)
 
-# Sous-titre
-st.header("Bienvenue dans mon application Streamlit")
+# Interface utilisateur avec Streamlit
+st.title("Système de Gestion d'Inventaire")
 
-# Texte simple
-st.write("Ceci est un test d'affichage. Pas de données pour l'instant !")
+# Afficher les produits disponibles
+st.subheader("Produits Disponibles")
+produits = db.get_products()
 
-# Ajouter un bouton
-if st.button("Cliquez ici"):
-    st.write("Le bouton a été cliqué !")
+# Afficher les produits dans un tableau
+if produits:
+    for produit in produits:
+        st.write(f"ID: {produit[0]}, Nom: {produit[1]}, Prix: {produit[2]}, Quantité: {produit[3]}")
+else:
+    st.write("Aucun produit trouvé.")
 
-# Ajouter un slider
-valeur = st.slider("Sélectionnez une valeur", 0, 100)
-st.write(f"Valeur sélectionnée : {valeur}")
+# Ajouter un produit
+st.subheader("Ajouter un nouveau produit")
+nom = st.text_input("Nom du produit")
+prix = st.number_input("Prix", min_value=0.00, format="%.2f")
+quantite = st.number_input("Quantité", min_value=0)
+
+if st.button("Ajouter produit"):
+    db.add_product(nom, prix, quantite)
+    st.success("Produit ajouté avec succès !")
+
+# Fermer la connexion à la base de données à la fin
+db.close_connection()
