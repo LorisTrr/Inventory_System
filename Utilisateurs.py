@@ -1,14 +1,23 @@
 import streamlit as st
+import time
 from datetime import datetime
-from database_manager import DatabaseManager  # Importez la classe DatabaseManager
+from database_manager import DatabaseManager
+
+# Fonction pour charger et appliquer le CSS externe
+def charger_css(fichier_css):
+    with open(fichier_css) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 def gestion_utilisateurs():
-   # Configuration de la connexion à la base de données
+    # Charger le fichier CSS
+    charger_css("users.css")
+
+    # Configuration de la connexion à la base de données
     db_manager = DatabaseManager(
-        host_name='localhost',           # Utiliser 'host_name' au lieu de 'host'
-        user_name='root',               # Utiliser 'user_name'
-        user_password='',                # Utiliser 'user_password'
-        db_name='inventiry_system'       # Utiliser 'db_name'
+        host_name='localhost',
+        user_name='root',
+        user_password='',
+        db_name='inventiry_system'
     )
 
     st.title("Gestion des Utilisateurs")
@@ -21,18 +30,34 @@ def gestion_utilisateurs():
     mot_de_passe = st.text_input("Veuillez entrer votre mot de passe :", type='password')
     est_admin = st.checkbox("Est-ce un administrateur ?")
 
+    # Vérifier si le bouton est cliqué
     if st.button("Ajouter Utilisateur"):
-        date_creation = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        db_manager.add_user(nom, prenom, email, telephone, mot_de_passe, est_admin, date_creation)  # Ajouter l'utilisateur
-        st.success(f"Utilisateur '{nom} {prenom}' ajouté avec succès.")
+        # Vérifier si tous les champs obligatoires sont remplis
+        if not nom or not prenom or not email or not telephone or not mot_de_passe:
+            st.error("Tous les champs sont obligatoires. Veuillez remplir toutes les informations avant d'ajouter un utilisateur.")
+        else:
+            # Ajouter l'utilisateur si tout est rempli
+            date_creation = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            db_manager.add_user(nom, prenom, email, telephone, mot_de_passe, est_admin, date_creation)
+            st.success(f"Utilisateur '{nom} {prenom}' ajouté avec succès.")
 
     # Afficher les utilisateurs existants
     st.subheader("Utilisateurs Existants")
     utilisateurs = db_manager.get_users()
-    
+
     if utilisateurs:
         for utilisateur in utilisateurs:
-            st.write(f"Nom: {utilisateur[1]}, Prénom: {utilisateur[2]}, Email: {utilisateur[3]}, Téléphone: {utilisateur[4]}, Admin: {utilisateur[6]}, Date de création: {utilisateur[7]}")
+            st.markdown(f"""
+                <div class="utilisateur-card">
+                    <div class="utilisateur-info">
+                        <h3>{utilisateur[1]} {utilisateur[2]}</h3>
+                        <p>Email: {utilisateur[3]}</p>
+                        <p>Téléphone: {utilisateur[4]}</p>
+                        <p>Admin: {'Oui' if utilisateur[6] else 'Non'}</p>
+                        <p>Date de création: {utilisateur[7]}</p>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
     else:
         st.warning("Aucun utilisateur trouvé.")
 

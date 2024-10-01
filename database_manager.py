@@ -27,7 +27,7 @@ class DatabaseManager:
 
         try:
             cursor = self.connection.cursor()
-            cursor.execute("SELECT * FROM produits")  # Remplace 'produits' par le nom de ta table
+            cursor.execute("SELECT * FROM inventaire")  # Remplace 'produits' par le nom de ta table
             products = cursor.fetchall()
             return products
         except Error as e:
@@ -41,7 +41,7 @@ class DatabaseManager:
 
         try:
             cursor = self.connection.cursor()
-            query = "INSERT INTO produits (nom, prix, quantite) VALUES (%s, %s, %s)"
+            query = "INSERT INTO inventaire (nom, prix, quantite) VALUES (%s, %s, %s)"
             values = (nom, prix, quantite)
             cursor.execute(query, values)
             self.connection.commit()

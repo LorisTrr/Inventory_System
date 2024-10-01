@@ -1,0 +1,175 @@
+/* Appliquer une police globale pour toute la page */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa; /* Fond léger et propre */
+    color: #272c31;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style pour le titre principal */
+h1 {
+    color: #333; /* Gris foncé pour le texte */
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* Formulaire d'ajout d'utilisateur */
+input[type="text"], input[type="password"] {
+    border: 1px solid #ccc;  /* Bordure plus légère */
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #007bff;  /* Bordure bleue moderne au focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); /* Ombre douce au focus */
+    outline: none;
+}
+
+/* Style pour les cases à cocher */
+.stCheckbox {
+    margin: 15px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Style pour les boutons */
+.stButton button {
+    background-color: #007bff;  /* Bleu moderne */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1); /* Ombre légère */
+}
+
+.stButton button:hover {
+    background-color: #0056b3;  /* Bleu plus foncé au survol */
+    transform: translateY(-2px);  /* Légère élévation au survol */
+}
+
+/* Style pour le sous-titre des utilisateurs existants */
+h2, .stSubheader {
+    color: #333;
+    font-size: 28px;
+    margin-top: 40px;
+    text-align: center;
+    border-bottom: 1px solid #007bff; /* Ligne subtile en bleu */
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Style pour l'affichage des utilisateurs existants */
+.utilisateur-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Ombre douce */
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.utilisateur-card:hover {
+    transform: translateY(-5px); /* Légère élévation au survol */
+}
+
+.utilisateur-info {
+    flex: 1;
+    color: #333;
+    font-size: 16px;
+}
+
+.utilisateur-info h3 {
+    margin: 0;
+    color: #007bff; /* Couleur du titre (nom de l'utilisateur) */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.utilisateur-info p {
+    margin: 5px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.utilisateur-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.utilisateur-actions button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.utilisateur-actions button:hover {
+    background-color: #0056b3;
+}
+
+.utilisateur-actions .badge {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Style pour les messages de succès et d'avertissement */
+.stAlert {
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.stSuccess {
+    background-color: #e6ffed;
+    color: #28a745;
+    border-left: 5px solid #28a745;
+}
+
+.stWarning {
+    background-color: #fff4e5;
+    color: #f0a500;
+    border-left: 5px solid #f0a500;
+}
+
+/* Ajustement pour la largeur de la page */
+.main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); /* Ombre propre et moderne */
+}
+
+/* Amélioration pour les transitions */
+.stButton button:active {
+    transform: translateY(1px);
+}
+
+/* Ajout d'une transition douce pour les éléments interactifs */
+input[type="text"], input[type="password"], .stButton button {
+    transition: all 0.3s ease;
+}

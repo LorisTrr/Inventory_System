@@ -1,6 +1,7 @@
 import streamlit as st
 from database_manager import DatabaseManager  # Assurez-vous d'avoir le bon chemin d'importation
 from Utilisateurs import gestion_utilisateurs  # Importer la fonction de gestion des utilisateurs
+from Produit import gestion_produits # Importer la fonction de gestion des produits
 
 # Configuration de la connexion à la base de données
 db = DatabaseManager(
@@ -14,31 +15,7 @@ page = st.sidebar.selectbox("Choisissez la page", ["Gestion des Produits", "Gest
 
 # Page de gestion des produits
 if page == "Gestion des Produits":
-    st.title("Système de Gestion d'Inventaire - Produits")
-
-    # Afficher les produits disponibles
-    st.subheader("Produits Disponibles")
-    produits = db.get_products()
-
-    # Afficher les produits dans un tableau
-    if produits:
-        for produit in produits:
-            st.write(f"ID: {produit[0]}, Nom: {produit[1]}, Prix: {produit[2]}, Quantité: {produit[3]}")
-    else:
-        st.write("Aucun produit trouvé.")
-
-    # Ajouter un produit
-    st.subheader("Ajouter un nouveau produit")
-    nom = st.text_input("Nom du produit")
-    prix = st.number_input("Prix", min_value=0.00, format="%.2f")
-    quantite = st.number_input("Quantité", min_value=0)
-
-    if st.button("Ajouter produit"):
-        if nom and prix > 0 and quantite > 0:
-            db.add_product(nom, prix, quantite)
-            st.success("Produit ajouté avec succès !")
-        else:
-            st.error("Veuillez remplir tous les champs correctement.")
+    gestion_produits()
 
 # Page de gestion des utilisateurs
 elif page == "Gestion des Utilisateurs":
