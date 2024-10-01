@@ -49,6 +49,22 @@ class DatabaseManager:
         except Error as e:
             print(f"Erreur lors de l'ajout du produit : {e}")
 
+    def delete_product(self, product_id):
+        """Supprime un produit de la base de données en fonction de son ID."""
+        if self.connection is None:
+            print("Erreur : connexion non établie à la base de données.")
+            return
+
+        try:
+            cursor = self.connection.cursor()
+            query = "DELETE FROM inventaire WHERE id = %s"  # Assurez-vous que 'id' est le nom correct de la colonne dans votre table
+            cursor.execute(query, (product_id,))  # Ajout d'une virgule pour faire un tuple
+            self.connection.commit()
+            print(f"Produit avec ID {product_id} supprimé avec succès.")
+        except Error as e:
+            print(f"Erreur lors de la suppression du produit : {e}")
+
+
     def get_users(self):
         if self.connection is None:
             print("Erreur : connexion non établie à la base de données.")
@@ -80,6 +96,21 @@ class DatabaseManager:
             print(f"Utilisateur {nom} ajouté avec succès.")
         except Error as e:
             print(f"Erreur lors de l'ajout de l'utilisateur : {e}")
+
+    def delete_user(self, user_id):
+        """Supprime un utilisateur de la base de données en fonction de son ID."""
+        if self.connection is None:
+            print("Erreur : connexion non établie à la base de données.")
+            return
+
+        try:
+            cursor = self.connection.cursor()
+            query = "DELETE FROM utilisateurs WHERE id = %s"  # Remplace 'id' par le nom de la colonne ID dans ta table
+            cursor.execute(query, (user_id,))
+            self.connection.commit()
+            print(f"Utilisateur avec ID {user_id} supprimé avec succès.")
+        except Error as e:
+            print(f"Erreur lors de la suppression de l'utilisateur : {e}")
 
     def close_connection(self):
         if self.connection and self.connection.is_connected():

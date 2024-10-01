@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 from datetime import datetime
 from database_manager import DatabaseManager
 
@@ -30,7 +29,7 @@ def gestion_utilisateurs():
     mot_de_passe = st.text_input("Veuillez entrer votre mot de passe :", type='password')
     est_admin = st.checkbox("Est-ce un administrateur ?")
 
-    # Vérifier si le bouton est cliqué
+    # Vérifier si le bouton d'ajout est cliqué
     if st.button("Ajouter Utilisateur"):
         # Vérifier si tous les champs obligatoires sont remplis
         if not nom or not prenom or not email or not telephone or not mot_de_passe:
@@ -47,6 +46,7 @@ def gestion_utilisateurs():
 
     if utilisateurs:
         for utilisateur in utilisateurs:
+            user_id = utilisateur[0]  # Supposons que l'ID de l'utilisateur est à l'index 0
             st.markdown(f"""
                 <div class="utilisateur-card">
                     <div class="utilisateur-info">
@@ -58,12 +58,13 @@ def gestion_utilisateurs():
                     </div>
                 </div>
             """, unsafe_allow_html=True)
+
+            # Utiliser un bouton Streamlit pour la suppression
+            if st.button(f"Supprimer {utilisateur[1]} {utilisateur[2]}"):
+                db_manager.delete_user(user_id)
+                st.success(f"Utilisateur '{utilisateur[1]} {utilisateur[2]}' supprimé avec succès.")
     else:
         st.warning("Aucun utilisateur trouvé.")
 
     # Fermer la connexion à la base de données à la fin
     db_manager.close_connection()
-
-# Si tu souhaites exécuter ce fichier indépendamment, tu peux ajouter cette condition
-if __name__ == "__main__":
-    gestion_utilisateurs()

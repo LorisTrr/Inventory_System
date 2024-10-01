@@ -24,7 +24,7 @@ input[type="text"], input[type="password"] {
     padding: 12px;
     width: 100%;
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 20px;
     background-color: #fff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -42,13 +42,13 @@ input[type="text"]:focus, input[type="password"]:focus {
     color: #555;
 }
 
-/* Style pour les boutons */
-.stButton button {
+/* Style pour le bouton d'ajout d'utilisateur */
+.stButton button{
     background-color: #007bff;  /* Bleu moderne */
     color: white;
     border: none;
-    padding: 12px 24px;
     border-radius: 8px;
+    padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -57,7 +57,6 @@ input[type="text"]:focus, input[type="password"]:focus {
 
 .stButton button:hover {
     background-color: #0056b3;  /* Bleu plus foncé au survol */
-    transform: translateY(-2px);  /* Légère élévation au survol */
 }
 
 /* Style pour le sous-titre des utilisateurs existants */
@@ -173,3 +172,4 @@ h2, .stSubheader {
 input[type="text"], input[type="password"], .stButton button {
     transition: all 0.3s ease;
 }
+

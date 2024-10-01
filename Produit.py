@@ -40,15 +40,26 @@ def gestion_produits():
     # Afficher les produits dans un tableau
     if produits:
         for produit in produits:
+            product_id = produit[0]  # L'ID du produit est à l'index 0 dans chaque ligne
+
             st.markdown(f"""
                         <div class="produits-card">
                             <div class="produits-info">
-                                <h3>{produit[1]}</h3>
-                                <p>ID: {produit[0]}</p>
-                                <p>Prix: {produit[2]}</p>
-                                <p>Quantité: {produit[3]}</p>
+                                <h3>{produit[1]}</h3> <!-- Nom du produit -->
+                                <p>ID: {produit[0]}</p> <!-- ID du produit -->
+                                <p>Prix: {produit[2]:.2f} €</p> <!-- Prix du produit -->
+                                <p>Quantité: {produit[3]}</p> <!-- Quantité disponible -->
                             </div>
                         </div>
             """, unsafe_allow_html=True)
+
+            # Bouton Streamlit pour la suppression, avec une clé unique pour chaque produit
+            if st.button(f"Supprimer {produit[1]}"):
+                db_manager.delete_product(product_id)
+                st.success(f"Produit '{produit[1]}' supprimé avec succès.")
     else:
         st.warning("Aucun produit trouvé.")
+
+    # Fermer la connexion à la base de données à la fin
+    db_manager.close_connection()
+
