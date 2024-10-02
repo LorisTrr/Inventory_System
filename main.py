@@ -8,7 +8,7 @@ db = DatabaseManager(
     host_name='localhost',           # Utiliser 'host_name' au lieu de 'host'
     user_name='root',               # Utiliser 'user_name'
     user_password='',                # Utiliser 'user_password'
-    db_name='inventiry_system'       # Utiliser 'db_name'
+    db_name='inventory_system'       # Utiliser 'db_name'
 )
 # Ajout de la barre latérale pour la navigation
 page = st.sidebar.selectbox("Choisissez la page", ["Gestion des Produits", "Gestion des Utilisateurs"])
