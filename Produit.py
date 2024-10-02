@@ -15,7 +15,7 @@ def gestion_produits():
         host_name='localhost',
         user_name='root',
         user_password='',
-        db_name='inventiry_system'
+        db_name='inventory'
     )
     # Page de gestion des produits
     st.title("Système de Gestion d'Inventaire - Produits")
