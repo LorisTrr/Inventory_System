@@ -7,7 +7,7 @@ from Produit import gestion_produits # Importer la fonction de gestion des produ
 db = DatabaseManager(
     host_name='localhost',           # Utiliser 'host_name' au lieu de 'host'
     user_name='root',               # Utiliser 'user_name'
-    user_password='',                # Utiliser 'user_password'
+    user_password='',                # Utiliser 'user_password
     db_name='inventory'       # Utiliser 'db_name'
 )
 # Ajout de la barre latérale pour la navigation
